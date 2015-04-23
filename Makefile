@@ -7,8 +7,8 @@ CXX := g++
 CXXFLAGS += -std=c++11 -g
 CXXFLAGS += -Wall -Wextra
 CXXFLAGS += -MMD -MP
-CXXFLAGS += $(shell pkg-config --cflags sdl2 gl glew)
-LIBS += $(shell pkg-config --libs sdl2 gl glew)
+CXXFLAGS += $(shell pkg-config --cflags sdl2 SDL2_image gl glew)
+LIBS += $(shell pkg-config --libs sdl2 SDL2_image gl glew)
 
 SRC_DIR := src
 INC_DIR := inc
