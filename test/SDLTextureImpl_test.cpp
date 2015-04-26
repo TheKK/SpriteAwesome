@@ -32,6 +32,117 @@ TEST(SDLTextureImpl, construcWithNonexistFilePathArgument)
 	ASSERT_ANY_THROW(SDLTextureImpl("you can't find me"));
 }
 
+TEST(SDLTextureImpl, checkCopyConstructorNoThrowWithNonemptyTexture)
+{
+	SDLTextureImpl base(kTestImageName);
+
+	ASSERT_NO_THROW(SDLTextureImpl target(base));
+}
+
+TEST(SDLTextureImpl, checkCopyConstructorNoThrowWithEmptyTexture)
+{
+	SDLTextureImpl base;
+
+	ASSERT_NO_THROW(SDLTextureImpl target(base));
+}
+
+TEST(SDLTextureImpl, makeEqOperatorTureWithNonemptyTextures)
+{
+	SDLTextureImpl target1(kTestImageName);
+	SDLTextureImpl target2(kTestImageName);
+
+	bool expected = true;
+	bool actual = (target1 == target2);
+
+	ASSERT_EQ(expected, actual);
+}
+
+TEST(SDLTextureImpl, makeEqOperatorTureWithEmptyTextures)
+{
+	SDLTextureImpl target1;
+	SDLTextureImpl target2;
+
+	bool expected = true;
+	bool actual = (target1 == target2);
+
+	ASSERT_EQ(expected, actual);
+}
+
+TEST(SDLTextureImpl, makeEqOperatorFalseWithNonemptyTextures)
+{
+	SDLTextureImpl target1(kTestImageName);
+	SDLTextureImpl target2(kTestImageName);
+
+	((uint8_t*) target1.pixels())[2] = 0x96;
+	((uint8_t*) target2.pixels())[2] = 0x45;
+
+	bool expected = false;
+	bool actual = (target1 == target2);
+
+	ASSERT_EQ(expected, actual);
+}
+
+TEST(SDLTextureImpl, makeEqOperatorTrueWithNonemptyTextureAndEmptyTexture)
+{
+	SDLTextureImpl target1(kTestImageName);
+	SDLTextureImpl target2;
+
+	bool expected = false;
+	bool actual = (target1 == target2);
+
+	ASSERT_EQ(expected, actual);
+}
+
+TEST(SDLTextureImpl, checkEqOperatorWithNonemptyTexture)
+{
+	SDLTextureImpl target1(kTestImageName);
+	SDLTextureImpl target2(kTestImageName);
+
+	bool expected = true;
+	bool actual = (target1 == target2);
+
+	ASSERT_EQ(expected, actual);
+}
+
+TEST(SDLTextureImpl, assignEmptyTextureToNonempty)
+{
+	SDLTextureImpl target1(kTestImageName);
+	SDLTextureImpl target2;
+
+	target2 = target1;
+
+	bool expected = true;
+	bool actual = (target1 == target2);
+
+	ASSERT_EQ(expected, actual);
+}
+
+TEST(SDLTextureImpl, assignEmptyTextureToEmpty)
+{
+	SDLTextureImpl target1;
+	SDLTextureImpl target2;
+
+	target2 = target1;
+
+	bool expected = true;
+	bool actual = (target1 == target2);
+
+	ASSERT_EQ(expected, actual);
+}
+
+TEST(SDLTextureImpl, assignNonemptyTextureToEmpty)
+{
+	SDLTextureImpl target1(kTestImageName);
+	SDLTextureImpl target2;
+
+	target1 = target2;
+
+	bool expected = true;
+	bool actual = (target1 == target2);
+
+	ASSERT_EQ(expected, actual);
+}
+
 TEST(SDLTextureImpl, loadTextureFromFileAndSucess)
 {
 	SDLTextureImpl target;

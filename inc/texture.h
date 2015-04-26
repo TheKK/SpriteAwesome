@@ -27,6 +27,10 @@ class SDLTextureImpl : public ITexture
 public:
 	SDLTextureImpl() {}
 	SDLTextureImpl(const std::string& filePath);
+	SDLTextureImpl(const SDLTextureImpl& other);
+
+	SDLTextureImpl& operator=(const SDLTextureImpl& other);
+	bool operator==(const SDLTextureImpl& other);
 
 	virtual ~SDLTextureImpl();
 
@@ -63,6 +67,28 @@ public:
 	}
 private:
 	SDL_Surface* surface_ = nullptr;
+
+	SDL_Surface* createSurfaceFromOther_(const SDLTextureImpl& other)
+	{
+		assert(other.surface_);
+
+		SDL_Surface* newSurface;
+
+		newSurface = SDL_CreateRGBSurfaceFrom(
+			other.pixels(),
+			other.width(),
+			other.height(),
+			other.bpp() * 8,
+			other.surface_->pitch,
+			other.surface_->format->Rmask,
+			other.surface_->format->Gmask,
+			other.surface_->format->Bmask,
+			other.surface_->format->Amask);
+
+		return newSurface;
+	}
 };
+
+
 
 #endif /* TEXTURE_H */
