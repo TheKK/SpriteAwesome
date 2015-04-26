@@ -8,7 +8,9 @@ TEST_DEPS := $(OBJS:.o=.d)
 
 TEST_RUNNER := $(BUILD_DIR)/$(BIN_DIR)/testRunner
 
-test: $(TEST_RUNNER)
+ALL += $(TEST_RUNNER);
+
+testRunner: $(TEST_RUNNER)
 
 $(TEST_RUNNER): $(TEST_OBJS) $(filter-out %main.o, $(OBJS))
 	@mkdir -p $(dir $@)

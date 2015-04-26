@@ -7,8 +7,8 @@ CXX := g++
 CXXFLAGS += -std=c++11 -g
 CXXFLAGS += -Wall -Wextra
 CXXFLAGS += -MMD -MP
-CXXFLAGS += $(shell pkg-config --cflags sdl2 SDL2_image gl glew)
-LIBS += $(shell pkg-config --libs sdl2 SDL2_image gl glew)
+CXXFLAGS += $(shell pkg-config --cflags sdl2 SDL2_image)
+LIBS += $(shell pkg-config --libs sdl2 SDL2_image)
 
 SRC_DIR := src
 INC_DIR := inc
@@ -19,9 +19,11 @@ SRCS := $(wildcard $(SRC_DIR)/*.cpp)
 OBJS := $(addprefix $(BUILD_DIR)/, $(SRCS:.cpp=.o))
 DEPS := $(OBJS:.o=.d)
 
-OUT_EXE := spriteAwesome
+OUT_EXE := $(BUILD_DIR)/$(BIN_DIR)/spriteAwesome
 
-all: $(BUILD_DIR)/$(BIN_DIR)/$(OUT_EXE)
+ALL += $(OUT_EXE)
+
+default: $(OUT_EXE)
 
 include $(wildcard mk/*.mk)
 
@@ -35,7 +37,10 @@ $(BUILD_DIR)/%.o: %.cpp
 	@$(CXX) $(CXXFLAGS) -I $(INC_DIR) -c $< -o $@
 	@echo "     CXX    " $(notdir $@)
 
-.PHONY: clean
+.PHONY: all clean
+
+all: $(ALL)
+
 clean:
 	@rm -frv $(BUILD_DIR)
 
