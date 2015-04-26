@@ -7,40 +7,55 @@
 #include <cstdint>
 #include <cassert>
 
-class Texture
+class ITexture
 {
 public:
-	Texture();
-	Texture(const std::string& filePath);
+	virtual ~ITexture() {}
 
-	~Texture();
+	virtual bool used() const = 0;
+	virtual int load(const std::string& filePath) = 0;
 
-	bool used() const { return surface_ != nullptr; }
+	virtual uint32_t width() const = 0;
+	virtual uint32_t height() const = 0;
+	virtual uint32_t bpp() const = 0;
 
-	int load(const std::string& filePath);
+	virtual void* pixels() = 0;
+};
 
-	uint32_t width() const
+class SDLTextureImpl : public ITexture
+{
+public:
+	SDLTextureImpl() {}
+	SDLTextureImpl(const std::string& filePath);
+
+	virtual ~SDLTextureImpl();
+
+	virtual bool used() const { return surface_ != nullptr; }
+
+	virtual int load(const std::string& filePath);
+
+	virtual uint32_t width() const
 	{
 		assert(surface_);
 
 		return surface_->w;
 	}
 
-	uint32_t height() const
+	virtual uint32_t height() const
 	{
 		assert(surface_);
 
 		return surface_->h;
 	}
 
-	uint32_t bpp() const
+	virtual uint32_t bpp() const
 	{
 		assert(surface_);
 
 		return surface_->format->BytesPerPixel;
 	}
 
-	void* pixels()
+	virtual void* pixels()
 	{
 		assert(surface_);
 

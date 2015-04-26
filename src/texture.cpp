@@ -3,24 +3,20 @@
 
 #include "texture.h"
 
-Texture::Texture()
-{
-}
-
-Texture::Texture(const std::string& filePath)
+SDLTextureImpl::SDLTextureImpl(const std::string& filePath)
 {
 	if (load(filePath))
 		throw std::runtime_error(IMG_GetError());
 }
 
-Texture::~Texture()
+SDLTextureImpl::~SDLTextureImpl()
 {
 	SDL_FreeSurface(surface_);
 	surface_ = nullptr;
 }
 
 int
-Texture::load(const std::string& filePath)
+SDLTextureImpl::load(const std::string& filePath)
 {
 	surface_ = IMG_Load(filePath.c_str());
 	if (!surface_)
