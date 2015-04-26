@@ -112,7 +112,7 @@ TEST(SDLTextureImpl, checkPixelsPtrExistAfterLoaded)
 	ASSERT_NE(notExpected, actual);
 }
 
-TEST(SDL_TextureImpl, checkPixelDataSotredIsCorrect)
+TEST(SDLTextureImpl, checkPixelDataSotredIsCorrect)
 {
 	SDLTextureImpl target(kTestImageName);
 
