@@ -19,7 +19,7 @@ public:
 	virtual uint32_t height() const = 0;
 	virtual uint32_t bpp() const = 0;
 
-	virtual void* pixels() = 0;
+	virtual void* pixels() const = 0;
 };
 
 class SDLTextureImpl : public ITexture
@@ -55,7 +55,7 @@ public:
 		return surface_->format->BytesPerPixel;
 	}
 
-	virtual void* pixels()
+	virtual void* pixels() const
 	{
 		assert(surface_);
 
