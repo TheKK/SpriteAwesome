@@ -1,4 +1,4 @@
-TEST_LIBS := -lgtest
+TEST_LIBS := -lgtest -pthread
 
 TEST_SRC_DIR := test
 
