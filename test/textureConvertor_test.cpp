@@ -23,7 +23,7 @@ namespace
 	const uint32_t kTestShadeTextureBpp = 3;
 }
 
-TEST(fromShadeTexturetoNormalTexture, usingSDLTextureImpl)
+TEST(fromShadeTextureToNormalTexture, usingSDLTextureImpl)
 {
 	SDLTextureImpl lightUp(kTestShadeTextureUpName);
 	SDLTextureImpl lightDown(kTestShadeTextureDownName);
@@ -31,7 +31,7 @@ TEST(fromShadeTexturetoNormalTexture, usingSDLTextureImpl)
 	SDLTextureImpl lightRight(kTestShadeTextureRightName);
 	SDLTextureImpl result;
 
-	result = fromShadeTexturetoNormalTexture(lightUp, lightDown,
+	result = fromShadeTextureToNormalTexture(lightUp, lightDown,
 						 lightLeft, lightRight);
 
 	bool expected = true;

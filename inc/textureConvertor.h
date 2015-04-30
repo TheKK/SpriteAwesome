@@ -9,7 +9,7 @@
 namespace TextureConvertor
 {
 	template<typename T>
-	T fromShadeTexturetoNormalTexture(T& lightUp, T& lightDown,
+	T fromShadeTextureToNormalTexture(T& lightUp, T& lightDown,
 					  T& lightLeft, T& lightRight)
 	{
 		static_assert(std::is_base_of<ITexture, T>::value,
