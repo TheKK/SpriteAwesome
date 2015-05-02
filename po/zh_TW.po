@@ -1,0 +1,29 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-02 13:06+0800\n"
+"PO-Revision-Date: 2015-05-02 14:26+0800\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Ying-Ruei Liang  <thumbd03803@gmail.com>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.7.5\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_TW\n"
+
+#: src/app.cpp:38
+#, c-format
+msgid "help won't help you\n"
+msgstr "幫助並不會幫助您\n"
+
+#: src/app.cpp:44
+#, c-format
+msgid "SpriteAwesome V0.0\n"
+msgstr "精靈讚啦 V0.0\n"

@@ -2,6 +2,7 @@
 #include <cstdio>
 
 #include "appOptions.h"
+#include "l10n.h"
 
 #include "app.h"
 
@@ -34,11 +35,11 @@ App::run(int argc, char* argv[])
 void
 App::printHelp_()
 {
-	printf("help won't help you\n");
+	printf(_("help won't help you\n"));
 }
 
 void
 App::printVersion_()
 {
-	printf("SpriteAwesome V0.0\n");
+	printf(_("SpriteAwesome V0.0\n"));
 }
