@@ -42,8 +42,11 @@ $(BUILD_DIR)/%.o: %.cpp
 	@$(CXX) $(CXXFLAGS) -I $(INC_DIR) -c $< -o $@
 	@echo "     CXX    " $(notdir $@)
 
-.PHONY: all clean
+.PHONY: all clean run
 all: $(ALL)
+
+run: $(OUT_EXE)
+	@./$< $(ARGS)
 
 clean:
 	@rm -frv $(BUILD_DIR)
