@@ -13,12 +13,12 @@ enum class Operations {
 class AppOptions
 {
 public:
-	AppOptions() {};
+	AppOptions() {}
 
 	int parse(int argc, char* argv[]);
 
-	bool shouldPrintHelp() const { return shouldPrintHelp_; };
-	bool shouldPrintVersion() const { return shouldPrintVersion_; };
+	bool shouldPrintHelp() const { return shouldPrintHelp_; }
+	bool shouldPrintVersion() const { return shouldPrintVersion_; }
 
 	bool shouldUseDefaultOutputName() const { return outputFile_ == ""; }
 	const std::string& getOuputFileName() const { return outputFile_; }
