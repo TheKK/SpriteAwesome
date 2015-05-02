@@ -168,7 +168,7 @@ TEST(AppOptions, parseToSetOperationAsGenerateNormalTexture)
 
 	target.parse(argc, argv);
 
-	Operations expected = Operations::generateNormalMap;
+	Operations expected = Operations::generateNormalTexture;
 	Operations actual = target.getOperation();
 
 	ASSERT_EQ(expected, actual);
@@ -185,7 +185,7 @@ TEST(AppOptions, parseToSetOperationAsGenerateDepthTexture)
 
 	target.parse(argc, argv);
 
-	Operations expected = Operations::generateDepthMap;
+	Operations expected = Operations::generateDepthTexture;
 	Operations actual = target.getOperation();
 
 	ASSERT_EQ(expected, actual);

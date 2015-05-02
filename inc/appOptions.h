@@ -6,8 +6,8 @@
 
 enum class Operations {
 	none,
-	generateNormalMap,
-	generateDepthMap
+	generateNormalTexture,
+	generateDepthTexture
 };
 
 class AppOptions

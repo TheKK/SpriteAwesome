@@ -23,13 +23,13 @@ AppOptions::parse(int argc, char* argv[])
 			if (operation_ != Operations::none)
 				return ERROR_MULTI_OPERATION;
 
-			operation_ = Operations::generateNormalMap;
+			operation_ = Operations::generateNormalTexture;
 			break;
 		case 'd':
 			if (operation_ != Operations::none)
 				return ERROR_MULTI_OPERATION;
 
-			operation_ = Operations::generateDepthMap;
+			operation_ = Operations::generateDepthTexture;
 			break;
 		case 'o':
 			outputFile_ = optarg;
