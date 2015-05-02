@@ -15,10 +15,10 @@ AppOptions::parse(int argc, char* argv[])
 		switch (opt) {
 		case 'h':
 			shouldPrintHelp_ = true;
-			break;
+			return 0;
 		case 'v':
 			shouldPrintVersion_ = true;
-			break;
+			return 0;
 		case 'n':
 			if (operation_ != Operations::none)
 				return ERROR_MULTI_OPERATION;
