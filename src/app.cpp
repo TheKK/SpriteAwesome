@@ -1,10 +1,15 @@
-#include <getopt.h>
 #include <cstdio>
 
 #include "appOptions.h"
 #include "l10n.h"
+#include "error.h"
 
 #include "app.h"
+
+namespace
+{
+	const std::string kDefaultOutName = "result.bmp";
+}
 
 App::App()
 {
@@ -18,8 +23,12 @@ App::run(int argc, char* argv[])
 
 	ret = appOptions.parse(argc, argv);
 	if (ret < 0) {
-		printUsage_();
-		return ret;
+		if (ret == ERROR_INVALID_OPTION)
+			printUsage_();
+
+		fprintf(stderr, "%s\n", getError(ret));
+
+		return -1;
 	}
 
 	if (appOptions.shouldPrintHelp()) {
@@ -29,6 +38,25 @@ App::run(int argc, char* argv[])
 	if (appOptions.shouldPrintVersion()) {
 		printVersion_();
 		return 0;
+	}
+	if (appOptions.shouldUseDefaultOutputName())
+		outputFileName_ = kDefaultOutName;
+	else
+		outputFileName_ = appOptions.getOuputFileName();
+
+	switch (appOptions.getOperation()) {
+	case Operations::generateNormalTexture:
+		/* TODO implement this */
+		printf("normal texture");
+		break;
+	case Operations::generateDepthTexture:
+		/* TODO implement this */
+		printf("depth texture");
+		break;
+	default:
+	case Operations::none:
+		printUsage_();
+		break;
 	}
 
 	return 0;
