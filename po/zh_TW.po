@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 16:52+0800\n"
-"PO-Revision-Date: 2015-05-02 16:54+0800\n"
+"POT-Creation-Date: 2015-05-02 20:32+0800\n"
+"PO-Revision-Date: 2015-05-02 20:43+0800\n"
 "Last-Translator: Ying-Ruei Liang  <thumbd03803@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -43,7 +43,11 @@ msgid ""
 "command"
 msgstr "不明確的操作選項，請不要將不同的操作混在同一行指令內"
 
-#: src/error.cpp:18
+#: src/error.cpp:19
+msgid "You need exactly four input files to process"
+msgstr "您需要正好四個輸入檔案才能進行操作"
+
+#: src/error.cpp:22
 msgid ""
 "Can not find corresponded error message, please file a bug to developers, "
 "thanks!"
