@@ -15,13 +15,30 @@ App::run(int argc, char* argv[])
 	AppOptions appOptions;
 	int ret;
 
-	if ((ret = appOptions.parse(argc, argv)))
+	ret = appOptions.parse(argc, argv);
+	if (ret < 0)
 		return ret;
 
-	if (appOptions.shouldPrintHelp())
-		printf("help won't help you\n");
-	if (appOptions.shouldPrintVersion())
-		printf("SpriteAwesome V0.0\n");
+	if (appOptions.shouldPrintHelp()) {
+		printHelp_();
+		return 0;
+	}
+	if (appOptions.shouldPrintVersion()) {
+		printVersion_();
+		return 0;
+	}
 
 	return 0;
+}
+
+void
+App::printHelp_()
+{
+	printf("help won't help you\n");
+}
+
+void
+App::printVersion_()
+{
+	printf("SpriteAwesome V0.0\n");
 }

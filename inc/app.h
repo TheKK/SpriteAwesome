@@ -8,6 +8,9 @@ public:
 	App();
 
 	int run(int argc, char* argv[]);
+private:
+	void printHelp_();
+	void printVersion_();
 };
 
 #endif /* APP_H */
