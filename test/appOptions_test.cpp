@@ -190,3 +190,55 @@ TEST(AppOptions, parseToSetOperationAsGenerateDepthTexture)
 
 	ASSERT_EQ(expected, actual);
 }
+
+TEST(AppOptions, parseWithLessThanFourInput)
+{
+	AppOptions target;
+	int argc = 2;
+	char* argv[] = {
+		(char*) "target",
+		(char*) "input1"
+	};
+
+	int notExpected = 0;
+	int actual = target.parse(argc, argv);
+
+	ASSERT_NE(notExpected, actual);
+}
+
+TEST(AppOptions, parseWithMoreThanFourInput)
+{
+	AppOptions target;
+	int argc = 6;
+	char* argv[] = {
+		(char*) "target",
+		(char*) "input1",
+		(char*) "input2",
+		(char*) "input3",
+		(char*) "input4",
+		(char*) "input5"
+	};
+
+	int notExpected = 0;
+	int actual = target.parse(argc, argv);
+
+	ASSERT_NE(notExpected, actual);
+}
+
+TEST(AppOptions, parseWithExactlyFourInput)
+{
+	AppOptions target;
+	int argc = 5;
+	char* argv[] = {
+		(char*) "target",
+		(char*) "input1",
+		(char*) "input2",
+		(char*) "input3",
+		(char*) "input4"
+	};
+
+	int expected = 0;
+	int actual = target.parse(argc, argv);
+
+	ASSERT_EQ(expected, actual);
+}

@@ -3,6 +3,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 enum class Operations {
 	none,
@@ -28,10 +29,10 @@ private:
 	bool shouldPrintHelp_ = false;
 	bool shouldPrintVersion_ = false;
 
+	std::vector<std::string> inputFiles_;
 	std::string outputFile_ = "";
 
 	Operations operation_ = Operations::none;
 };
 
 #endif /* APP_OPTIONS_H */
-

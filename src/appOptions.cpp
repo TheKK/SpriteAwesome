@@ -39,5 +39,13 @@ AppOptions::parse(int argc, char* argv[])
 		}
 	}
 
+	while (optind < argc) {
+		inputFiles_.push_back(argv[optind]);
+		optind++;
+	}
+
+	if (inputFiles_.size() != 4)
+		return ERROR_NOT_ENOUGH_INPUT;
+
 	return 0;
 }

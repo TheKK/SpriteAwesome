@@ -14,6 +14,10 @@ getError(int errorno)
 	case ERROR_MULTI_OPERATION:
 		return (char*) _("Ambiguous operation options, please don't "
 			"mix different operations in one command");
+	case ERROR_NOT_ENOUGH_INPUT:
+	case ERROR_TOO_MUCH_INPUT:
+		return (char*) _("You need exactly four input files to "
+				 "process");
 	default:
 		return (char*) _("Can not find corresponded error message, "
 			"please file a bug to developers, thanks!"); }
