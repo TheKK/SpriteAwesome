@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 15:10+0800\n"
-"PO-Revision-Date: 2015-05-02 15:11+0800\n"
+"POT-Creation-Date: 2015-05-02 16:52+0800\n"
+"PO-Revision-Date: 2015-05-02 16:54+0800\n"
 "Last-Translator: Ying-Ruei Liang  <thumbd03803@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -18,17 +18,33 @@ msgstr ""
 "X-Generator: Poedit 1.7.5\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/app.cpp:40
+#: src/app.cpp:68
 #, c-format
 msgid "SpriteAwesome Usage: [-v version] [-h help]\n"
 msgstr "精靈讚啦 用法：[-v 版本] [-h 幫助]\n"
 
-#: src/app.cpp:45
+#: src/app.cpp:73
 #, c-format
 msgid "help won't help you\n"
 msgstr "幫助並不會幫助您\n"
 
-#: src/app.cpp:51
+#: src/app.cpp:79
 #, c-format
 msgid "SpriteAwesome V0.0\n"
 msgstr "精靈讚啦 V0.0\n"
+
+#: src/error.cpp:10
+msgid "There's no error"
+msgstr "無錯誤發生"
+
+#: src/error.cpp:15
+msgid ""
+"Ambiguous operation options, please don't mix different operations in one "
+"command"
+msgstr "不明確的操作選項，請不要將不同的操作混在同一行指令內"
+
+#: src/error.cpp:18
+msgid ""
+"Can not find corresponded error message, please file a bug to developers, "
+"thanks!"
+msgstr "查無相對應的錯誤訊息，請向開發者發送錯誤報告，感謝！"
