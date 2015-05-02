@@ -7,23 +7,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 13:06+0800\n"
-"PO-Revision-Date: 2015-05-02 14:26+0800\n"
+"POT-Creation-Date: 2015-05-02 15:10+0800\n"
+"PO-Revision-Date: 2015-05-02 15:11+0800\n"
+"Last-Translator: Ying-Ruei Liang  <thumbd03803@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Ying-Ruei Liang  <thumbd03803@gmail.com>\n"
-"Language-Team: \n"
 "X-Generator: Poedit 1.7.5\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_TW\n"
 
-#: src/app.cpp:38
+#: src/app.cpp:40
+#, c-format
+msgid "SpriteAwesome Usage: [-v version] [-h help]\n"
+msgstr "精靈讚啦 用法：[-v 版本] [-h 幫助]\n"
+
+#: src/app.cpp:45
 #, c-format
 msgid "help won't help you\n"
 msgstr "幫助並不會幫助您\n"
 
-#: src/app.cpp:44
+#: src/app.cpp:51
 #, c-format
 msgid "SpriteAwesome V0.0\n"
 msgstr "精靈讚啦 V0.0\n"

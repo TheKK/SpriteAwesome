@@ -17,8 +17,10 @@ App::run(int argc, char* argv[])
 	int ret;
 
 	ret = appOptions.parse(argc, argv);
-	if (ret < 0)
+	if (ret < 0) {
+		printUsage_();
 		return ret;
+	}
 
 	if (appOptions.shouldPrintHelp()) {
 		printHelp_();
@@ -32,6 +34,11 @@ App::run(int argc, char* argv[])
 	return 0;
 }
 
+void
+App::printUsage_()
+{
+	printf(_("SpriteAwesome Usage: [-v version] [-h help]\n"));
+}
 void
 App::printHelp_()
 {
