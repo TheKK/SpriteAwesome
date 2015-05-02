@@ -1,5 +1,7 @@
 #include <getopt.h>
 
+#include "error.h"
+
 #include "appOptions.h"
 
 int
@@ -9,7 +11,7 @@ AppOptions::parse(int argc, char* argv[])
 
 	optind = 0;
 
-	while ((opt = getopt(argc, argv, "hvo:")) != -1) {
+	while ((opt = getopt(argc, argv, "hvndo:")) != -1) {
 		switch (opt) {
 		case 'h':
 			shouldPrintHelp_ = true;
@@ -17,11 +19,23 @@ AppOptions::parse(int argc, char* argv[])
 		case 'v':
 			shouldPrintVersion_ = true;
 			break;
+		case 'n':
+			if (operation_ != Operations::none)
+				return ERROR_MULTI_OPERATION;
+
+			operation_ = Operations::generateNormalMap;
+			break;
+		case 'd':
+			if (operation_ != Operations::none)
+				return ERROR_MULTI_OPERATION;
+
+			operation_ = Operations::generateDepthMap;
+			break;
 		case 'o':
 			outputFile_ = optarg;
 			break;
 		default:
-			return -1;
+			return ERROR_INVALID_OPTION;
 		}
 	}
 

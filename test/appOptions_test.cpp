@@ -124,3 +124,69 @@ TEST(AppOptions, parseToSet_outputFileName)
 
 	ASSERT_EQ(expected, actual);
 }
+
+TEST(AppOptions, parseNothingToKeepOperationAsNone)
+{
+	AppOptions target;
+	int argc = 1;
+	char* argv[] = {
+		(char*) "target"
+	};
+
+	target.parse(argc, argv);
+
+	Operations expected = Operations::none;
+	Operations actual = target.getOperation();
+
+	ASSERT_EQ(expected, actual);
+}
+
+TEST(AppOptions, parseMultipleOperationToFailed)
+{
+	AppOptions target;
+	int argc = 3;
+	char* argv[] = {
+		(char*) "target",
+		(char*) "-d",
+		(char*) "-n"
+	};
+
+	int nonexpected = 0;
+	int actual = target.parse(argc, argv);
+
+	ASSERT_NE(nonexpected, actual);
+}
+
+TEST(AppOptions, parseToSetOperationAsGenerateNormalTexture)
+{
+	AppOptions target;
+	int argc = 2;
+	char* argv[] = {
+		(char*) "target",
+		(char*) "-n"
+	};
+
+	target.parse(argc, argv);
+
+	Operations expected = Operations::generateNormalMap;
+	Operations actual = target.getOperation();
+
+	ASSERT_EQ(expected, actual);
+}
+
+TEST(AppOptions, parseToSetOperationAsGenerateDepthTexture)
+{
+	AppOptions target;
+	int argc = 2;
+	char* argv[] = {
+		(char*) "target",
+		(char*) "-d"
+	};
+
+	target.parse(argc, argv);
+
+	Operations expected = Operations::generateDepthMap;
+	Operations actual = target.getOperation();
+
+	ASSERT_EQ(expected, actual);
+}

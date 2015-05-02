@@ -4,6 +4,12 @@
 
 #include <string>
 
+enum class Operations {
+	none,
+	generateNormalMap,
+	generateDepthMap
+};
+
 class AppOptions
 {
 public:
@@ -14,12 +20,17 @@ public:
 	bool shouldPrintHelp() const { return shouldPrintHelp_; };
 	bool shouldPrintVersion() const { return shouldPrintVersion_; };
 
-	bool shouldUseDefaultOutputName() const { return outputFile_ == ""; };
-	const std::string& getOuputFileName() const { return outputFile_; };
+	bool shouldUseDefaultOutputName() const { return outputFile_ == ""; }
+	const std::string& getOuputFileName() const { return outputFile_; }
+
+	Operations getOperation() const { return operation_; }
 private:
 	bool shouldPrintHelp_ = false;
 	bool shouldPrintVersion_ = false;
+
 	std::string outputFile_ = "";
+
+	Operations operation_ = Operations::none;
 };
 
 #endif /* APP_OPTIONS_H */
