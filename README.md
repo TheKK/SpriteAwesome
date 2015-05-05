@@ -1,6 +1,6 @@
 SpriteAwesome  [![Build Status](https://travis-ci.org/TheKK/SpriteAwesome.svg?branch=dev)](https://travis-ci.org/TheKK/SpriteAwesome)
 =====
-*Copyright (C) 2014 TheKK, anarchih*
+*Copyright (C) 2015 TheKK, anarchih*
 
 > THIS PROGRAM IS DISTRIBUTED WITHOUT ANY WARRANTY<br/>
 > See the [license section](#license) for more information.
