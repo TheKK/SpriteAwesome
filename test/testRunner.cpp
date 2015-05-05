@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <SDL2/SDL_image.h>
+#include <Magick++.h>
 #include <stdexcept>
 
 class MyEnvironment : public ::testing::Environment
@@ -11,6 +12,8 @@ public:
 	{
 		if (IMG_Init(IMG_INIT_PNG) < 0)
 			throw std::runtime_error(IMG_GetError());
+
+		Magick::InitializeMagick(nullptr);
 	}
 
 	virtual void TearDown()

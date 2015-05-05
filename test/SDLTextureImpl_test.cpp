@@ -73,8 +73,8 @@ TEST(SDLTextureImpl, makeEqOperatorFalseWithNonemptyTextures)
 	SDLTextureImpl target1(kTestImageName);
 	SDLTextureImpl target2(kTestImageName);
 
-	((uint8_t*) target1.pixels())[2] = 0x96;
-	((uint8_t*) target2.pixels())[2] = 0x45;
+	target1.pixel(1, 12, {0x00, 0x11, 0x22});
+	target2.pixel(1, 12, {0xcc, 0x11, 0x22});
 
 	bool expected = false;
 	bool actual = (target1 == target2);
@@ -139,97 +139,6 @@ TEST(SDLTextureImpl, assignNonemptyTextureToEmpty)
 
 	bool expected = true;
 	bool actual = (target1 == target2);
-
-	ASSERT_EQ(expected, actual);
-}
-
-TEST(SDLTextureImpl, loadTextureFromFileAndSucess)
-{
-	SDLTextureImpl target;
-
-	int expected = 0;
-	int actual = target.load(kTestImageName);
-
-	ASSERT_EQ(expected, actual);
-}
-
-TEST(SDLTextureImpl, loadTextureFromFileAndFailure)
-{
-	SDLTextureImpl target;
-
-	int expected = -1;
-	int actual = target.load("you can't find me");
-
-	ASSERT_EQ(expected, actual);
-}
-
-TEST(SDLTextureImpl, loadTextureAndCheckIfUsed)
-{
-	SDLTextureImpl target(kTestImageName);
-
-	bool expected = true;
-	bool actual = target.used();
-
-	ASSERT_EQ(expected, actual);
-}
-
-TEST(SDLTextureImpl, loadNothingAndCheckIfUsed)
-{
-	SDLTextureImpl target;
-
-	bool expected = false;
-	bool actual = target.used();
-
-	ASSERT_EQ(expected, actual);
-}
-
-TEST(SDLTextureImpl, getWidth)
-{
-	SDLTextureImpl target(kTestImageName);
-
-	uint32_t expected = kTestImageWidth;
-	uint32_t actual = target.width();
-
-	ASSERT_EQ(expected, actual);
-}
-
-TEST(SDLTextureImpl, getHeight)
-{
-	SDLTextureImpl target(kTestImageName);
-
-	uint32_t expected = kTestImageHeight;
-	uint32_t actual = target.height();
-
-	ASSERT_EQ(expected, actual);
-}
-
-TEST(SDLTextureImpl, getBytePerPixel)
-{
-	SDLTextureImpl target(kTestImageName);
-
-	uint32_t expected = kTestImageBpp;
-	uint32_t actual = target.bpp();
-
-	ASSERT_EQ(expected, actual);
-}
-
-TEST(SDLTextureImpl, checkPixelsPtrExistAfterLoaded)
-{
-	SDLTextureImpl target(kTestImageName);
-
-	void* notExpected = nullptr;
-	void* actual = target.pixels();
-
-	ASSERT_NE(notExpected, actual);
-}
-
-TEST(SDLTextureImpl, checkPixelDataSotredIsCorrect)
-{
-	SDLTextureImpl target(kTestImageName);
-
-	int expected = 0;
-	int actual = memcmp(target.pixels(), kTestImageData,
-			    kTestImageWidth * kTestImageHeight * kTestImageBpp);
 
 	ASSERT_EQ(expected, actual);
 }

@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <Magick++.h>
 
 #include "appOptions.h"
 #include "l10n.h"
@@ -46,7 +47,6 @@ App::run(int argc, char* argv[])
 
 	switch (appOptions.getOperation()) {
 	case Operations::generateNormalTexture:
-		/* TODO implement this */
 		printf("normal texture");
 		break;
 	case Operations::generateDepthTexture:

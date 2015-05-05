@@ -4,6 +4,7 @@
 
 #include "texture.h"
 
+#ifndef DISABLE_SDL2
 SDLTextureImpl::SDLTextureImpl(const std::string& filePath)
 {
 	if (load(filePath))
@@ -51,11 +52,8 @@ SDLTextureImpl::operator==(const SDLTextureImpl& other)
 	if (height() != other.height())
 		return false;
 
-	if (bpp() != other.bpp())
-		return false;
-
-	if (memcmp(pixels(), other.pixels(),
-		   width() * height() * bpp()) != 0)
+	if (memcmp(surface_->pixels, other.surface_->pixels,
+		   width() * height() * surface_->format->BytesPerPixel) != 0)
 		return false;
 
 	return true;
@@ -76,3 +74,32 @@ SDLTextureImpl::load(const std::string& filePath)
 
 	return 0;
 }
+#endif /* DISABLE_SDL2 */
+
+#ifndef DISABLE_MAGICK_PLUS_PLUS
+MagickTextureImpl::MagickTextureImpl(const std::string& filePath)
+{
+	img_.read(filePath);
+}
+
+bool
+MagickTextureImpl::operator==(const MagickTextureImpl& other)
+{
+	if (!used() && !other.used())
+		return true;
+	else
+		return (img_ == other.img_);
+}
+
+int
+MagickTextureImpl::load(const std::string& filePath)
+{
+	try {
+		img_.read(filePath);
+	} catch (const std::exception& e) {
+		return -1;
+	}
+
+	return 0;
+}
+#endif /* DISABLE_MAGICK_PLUS_PLUS */

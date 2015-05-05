@@ -21,7 +21,6 @@ TEST(AppOptions, parseWithKnownOptions)
 	int actual = target.parse(argc, argv);
 
 	ASSERT_EQ(expected, actual);
-	ASSERT_TRUE(target.shouldPrintHelp());
 }
 
 TEST(AppOptions, parseWithUnknowOptions)
