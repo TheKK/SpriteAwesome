@@ -2,7 +2,7 @@ SpriteAwesome  [![Build Status](https://travis-ci.org/TheKK/SpriteAwesome.svg?br
 =====
 *Copyright (C) 2015 TheKK, anarchih*
 
-> THIS PROGRAM IS DISTRIBUTED WITHOUT ANY WARRANTY<br/>
+> THIS PROGRAM IS DISTRIBUTED WITHOUT ANY WARRANTY
 > See the [license section](#license) for more information.
 
 Introduction
@@ -20,6 +20,53 @@ Usage
 -----
 
 I'll tell you someday, maybe
+
+Dependency
+-----
+
+- Tools
+	- C++ compiler (support C++11)
+	- GNU make
+	- pkg-config
+	- cppcheck (optional)
+
+- Libraries
+	- SDL >= 2.0
+	- SDL_Image >= 2.0
+	- ImageMagick++
+	- gtest (optional)
+
+Build
+----
+
+To build and run
+```shell
+make
+make run #executable file located at build/bin/
+```
+
+To run all tests
+```shell
+make runTest #executable file located at build/bin/
+```
+
+To run cppcheck
+```shell
+make cppcheck #I'm not sure if I can trust cppcheck...
+```
+
+To generate or update pot file
+```shell
+make l10n #pot file located at po/
+```
+
+To clean
+```shell
+#Use make
+make clean
+#or rm build/ yourself
+rm -fr build
+```
 
 License
 -----
