@@ -21,7 +21,7 @@ install:
         - if [ "$CXX" == "g++" ]; then sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 50; fi
 
         # Google test framework
-        - sudo apt-get install libgtest-dev
+        - sudo apt-get install -qq libgtest-dev
         - cd /usr/src/gtest
         - sudo cmake .
         - sudo make
@@ -45,6 +45,9 @@ install:
         - make -j 4
         - sudo make install
         - cd "${TRAVIS_BUILD_DIR}"
+
+        # ImgaeMagick++
+        - sudo apt-get install -qq libgraphicsmagick++1-dev libgraphicsmagick++3 libmagick++-dev libmagick++4
 
 after_install:
         - sudo ldconfig
