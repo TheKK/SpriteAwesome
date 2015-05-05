@@ -77,9 +77,9 @@ SDLTextureImpl::load(const std::string& filePath)
 #endif /* DISABLE_SDL2 */
 
 #ifndef DISABLE_MAGICK_PLUS_PLUS
-MagickTextureImpl::MagickTextureImpl(const std::string& filePath)
+MagickTextureImpl::MagickTextureImpl(const std::string& filePath):
+	img_(filePath)
 {
-	img_.read(filePath);
 }
 
 bool

@@ -14,7 +14,7 @@ enum class Operations {
 class AppOptions
 {
 public:
-	AppOptions() {}
+	AppOptions(): inputFiles_() {}
 
 	int parse(int argc, char* argv[]);
 

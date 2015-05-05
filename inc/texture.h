@@ -14,7 +14,8 @@ public:
 		uint8_t g;
 		uint8_t b;
 
-		Color() {}
+		Color():
+			r(0), g(0), b(0) {}
 
 		Color(uint8_t r, uint8_t g, uint8_t b):
 			r(r), g(g), b(b) {}
@@ -35,8 +36,8 @@ public:
 	virtual uint32_t width() const = 0;
 	virtual uint32_t height() const = 0;
 
-	virtual void pixel(int x, int y, Color color) = 0;
-	virtual Color pixel(int x, int y) const = 0;
+	virtual void pixel(uint32_t x, uint32_t y, Color color) = 0;
+	virtual Color pixel(uint32_t x, uint32_t y) const = 0;
 };
 
 #ifndef DISABLE_SDL2
@@ -73,10 +74,10 @@ public:
 		return surface_->h;
 	}
 
-	virtual void pixel(int x, int y, Color color)
+	virtual void pixel(uint32_t x, uint32_t y, Color color)
 	{
-		assert(x >= 0 && x < width());
-		assert(y >= 0 && y < height());
+		assert(x < width());
+		assert(y < height());
 
 		int offset = y * width() + x;
 		Color& colorRef = static_cast<Color*>(surface_->pixels)[offset];
@@ -84,10 +85,10 @@ public:
 		colorRef = color;
 	}
 
-	virtual Color pixel(int x, int y) const
+	virtual Color pixel(uint32_t x, uint32_t y) const
 	{
-		assert(x >= 0 && x < width());
-		assert(y >= 0 && y < height());
+		assert(x < width());
+		assert(y < height());
 
 		int offset = y * width() + x;
 		Color& colorRef = static_cast<Color*>(surface_->pixels)[offset];
@@ -126,7 +127,7 @@ private:
 class MagickTextureImpl : public ITexture
 {
 public:
-	MagickTextureImpl() {}
+	MagickTextureImpl(): img_() {}
 	MagickTextureImpl(const std::string& filePath);
 
 	bool operator==(const MagickTextureImpl& other);
@@ -149,7 +150,7 @@ public:
 		return img_.size().height();
 	}
 
-	virtual void pixel(int x, int y, Color color)
+	virtual void pixel(uint32_t x, uint32_t y, Color color)
 	{
 		Magick::ColorRGB magickColor((double) color.r / 255.0,
 					     (double) color.g / 255.0,
@@ -158,7 +159,7 @@ public:
 		img_.pixelColor(x, y, magickColor);
 	}
 
-	virtual Color pixel(int x, int y) const
+	virtual Color pixel(uint32_t x, uint32_t y) const
 	{
 		Magick::ColorRGB magickColor = img_.pixelColor(x, y);
 
