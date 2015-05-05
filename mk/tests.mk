@@ -17,6 +17,9 @@ $(TEST_RUNNER): $(TEST_OBJS) $(filter-out %main.o, $(OBJS))
 	@$(CXX) $^ $(LIBS) $(TEST_LIBS) -o $@
 	@echo "     LD     " $(notdir $@)
 
-.PHONY: runTest
+.PHONY: runTest cppcheck
 runTest: $(TEST_RUNNER)
 	@$<
+
+cppcheck:
+	@cppcheck --enable=all -q --error-exitcode=123 -I$(INC_DIR) $(SRC_DIR)
