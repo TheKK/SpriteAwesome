@@ -1,9 +1,9 @@
 #include <cstdio>
-#include <Magick++.h>
 
-#include "appOptions.h"
-#include "l10n.h"
 #include "error.h"
+#include "l10n.h"
+#include "texture.h"
+#include "textureConvertor.h"
 
 #include "app.h"
 
@@ -43,10 +43,14 @@ App::run(int argc, char* argv[])
 
 	switch (appOptions_.getOperation()) {
 	case Operations::generateNormalTexture:
-		printf("normal texture");
+		ret = generateNormalTexture_();
+		if (ret) {
+			fprintf(stderr,
+				_("Failed to generate normal texture\n"));
+			return -1;
+		}
 		break;
 	case Operations::generateDepthTexture:
-		/* TODO implement this */
 		printf("depth texture");
 		break;
 	default:
@@ -73,4 +77,52 @@ void
 App::printVersion_()
 {
 	printf(_("SpriteAwesome V0.0\n"));
+}
+
+int
+App::generateNormalTexture_()
+{
+	int ret = 0;
+	MagickTextureImpl lightUp, lightDown, lightLeft, lightRight, result;
+
+	ret = lightUp.load(appOptions_.getInputFileName(ShadeDir::Up));
+	if (ret) {
+		fprintf(stderr, "%s\n", getError(ret));
+		return -1;
+	}
+
+	ret = lightDown.load(appOptions_.getInputFileName(ShadeDir::Down));
+	if (ret) {
+		fprintf(stderr, "%s\n", getError(ret));
+		return -1;
+	}
+
+	ret = lightLeft.load(appOptions_.getInputFileName(ShadeDir::Left));
+	if (ret) {
+		fprintf(stderr, "%s\n", getError(ret));
+		return -1;
+	}
+
+	ret = lightRight.load(appOptions_.getInputFileName(ShadeDir::Right));
+	if (ret) {
+		fprintf(stderr, "%s\n", getError(ret));
+		return -1;
+	}
+
+	/* XXX Need a method to create empty texture */
+	ret = result.load(appOptions_.getInputFileName(ShadeDir::Up));
+	if (ret) {
+		fprintf(stderr, "%s\n", getError(ret));
+		return -1;
+	}
+
+	TextureConvertor::fromShadeTextureToNormalTexture(lightUp, lightDown,
+							  lightLeft, lightRight,
+							  result);
+
+	/* TODO Algorithm here */
+
+	result.write(outputFileName_);
+
+	return 0;
 }

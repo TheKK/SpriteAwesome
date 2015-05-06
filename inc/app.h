@@ -21,6 +21,8 @@ private:
 	void printUsage_();
 	void printHelp_();
 	void printVersion_();
+
+	int generateNormalTexture_();
 };
 
 #endif /* APP_H */
