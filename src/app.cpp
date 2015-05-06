@@ -20,10 +20,9 @@ App::App():
 int
 App::run(int argc, char* argv[])
 {
-	AppOptions appOptions;
 	int ret;
 
-	ret = appOptions.parse(argc, argv);
+	ret = appOptions_.parse(argc, argv);
 	if (ret < 0) {
 		if (ret == ERROR_INVALID_OPTION)
 			printUsage_();
@@ -33,20 +32,21 @@ App::run(int argc, char* argv[])
 		return -1;
 	}
 
-	if (appOptions.shouldPrintHelp()) {
+	if (appOptions_.shouldPrintHelp()) {
 		printHelp_();
 		return 0;
 	}
-	if (appOptions.shouldPrintVersion()) {
+	if (appOptions_.shouldPrintVersion()) {
 		printVersion_();
 		return 0;
 	}
-	if (appOptions.shouldUseDefaultOutputName())
+
+	if (appOptions_.shouldUseDefaultOutputName())
 		outputFileName_ = kDefaultOutName;
 	else
-		outputFileName_ = appOptions.getOuputFileName();
+		outputFileName_ = appOptions_.getOuputFileName();
 
-	switch (appOptions.getOperation()) {
+	switch (appOptions_.getOperation()) {
 	case Operations::generateNormalTexture:
 		printf("normal texture");
 		break;

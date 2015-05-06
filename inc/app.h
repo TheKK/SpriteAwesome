@@ -4,6 +4,8 @@
 
 #include <string>
 
+#include "appOptions.h"
+
 class App
 {
 public:
@@ -11,6 +13,7 @@ public:
 
 	int run(int argc, char* argv[]);
 private:
+	AppOptions appOptions_;
 	std::string outputFileName_;
 
 	void printUsage_();
