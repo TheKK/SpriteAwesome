@@ -12,11 +12,6 @@ namespace
 	const std::string kDefaultOutName = "result.bmp";
 }
 
-App::App():
-	outputFileName_()
-{
-}
-
 int
 App::run(int argc, char* argv[])
 {

@@ -9,7 +9,9 @@
 class App
 {
 public:
-	App();
+	App():
+		appOptions_(),
+		outputFileName_() {}
 
 	int run(int argc, char* argv[]);
 private:
