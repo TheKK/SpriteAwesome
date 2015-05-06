@@ -241,3 +241,30 @@ TEST(AppOptions, parseWithExactlyFourInput)
 
 	ASSERT_EQ(expected, actual);
 }
+
+TEST(AppOptions, retrieveFourInputFileName)
+{
+	AppOptions target;
+	int argc = 5;
+	char* argv[] = {
+		(char*) "target",
+		(char*) "input1",
+		(char*) "input2",
+		(char*) "input3",
+		(char*) "input4"
+	};
+
+	target.parse(argc, argv);
+
+	std::vector<std::string> expected = {
+		target.getInputFileName(ShadeDir::Up),
+		target.getInputFileName(ShadeDir::Down),
+		target.getInputFileName(ShadeDir::Left),
+		target.getInputFileName(ShadeDir::Right)
+	};
+	std::vector<std::string> actual = {
+		argv[1], argv[2], argv[3], argv[4]
+	};
+
+	ASSERT_EQ(expected, actual);
+}
