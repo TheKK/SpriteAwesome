@@ -45,10 +45,10 @@ TYPED_TEST(ITextureInterface, loadTextureFromFileAndFailure)
 {
 	ITexture& target = *this->texture_;
 
-	int expected = -1;
+	int notExpected = 0;
 	int actual = target.load("you can't find me");
 
-	ASSERT_EQ(expected, actual);
+	ASSERT_NE(notExpected, actual);
 }
 
 TYPED_TEST(ITextureInterface, loadTextureAndCheckIfUsed)

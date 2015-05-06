@@ -2,6 +2,8 @@
 #include <stdexcept>
 #include <cstring>
 
+#include "error.h"
+
 #include "texture.h"
 
 #ifndef DISABLE_SDL2
@@ -70,7 +72,7 @@ SDLTextureImpl::load(const std::string& filePath)
 {
 	surface_ = IMG_Load(filePath.c_str());
 	if (!surface_)
-		return -1;
+		return ERROR_TEX_LOAD_FAILED;
 
 	return 0;
 }
@@ -97,7 +99,7 @@ MagickTextureImpl::load(const std::string& filePath)
 	try {
 		img_.read(filePath);
 	} catch (const std::exception& e) {
-		return -1;
+		return ERROR_TEX_LOAD_FAILED;
 	}
 
 	return 0;
