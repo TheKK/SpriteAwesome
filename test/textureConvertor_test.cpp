@@ -1,41 +1,45 @@
 #include <gtest/gtest.h>
 #include <string>
 
-#include "data/lightUp.h"
-#include "data/lightDown.h"
-#include "data/lightLeft.h"
-#include "data/lightRight.h"
+#include "fakeit.hpp"
 
 #include "textureConvertor.h"
 
 using namespace TextureConvertor;
+using namespace fakeit;
+
+typedef ITexture::Color Color;
 
 namespace
 {
-	const std::string kTestShadeTextureUpName = "test/data/lightUp.png";
-	const std::string kTestShadeTextureDownName = "test/data/lightDown.png";
-	const std::string kTestShadeTextureLeftName = "test/data/lightLeft.png";
-	const std::string kTestShadeTextureRightName =
-		"test/data/lightRight.png";
-
-	const uint32_t kTestShadeTextureWidth = lightUp.width;
-	const uint32_t kTestShadeTextureHeight = lightUp.height;
-	const uint32_t kTestShadeTextureBpp = 3;
+	const uint32_t kTestWidth = 321;
+	const uint32_t kTestHeight = 321;
 }
 
-TEST(fromShadeTextureToNormalTexture, usingSDLTextureImpl)
+/* XXX Kind of useless test */
+TEST(TextureConvertors, fromShadeTextureToNormalTexture)
 {
-	SDLTextureImpl lightUp(kTestShadeTextureUpName);
-	SDLTextureImpl lightDown(kTestShadeTextureDownName);
-	SDLTextureImpl lightLeft(kTestShadeTextureLeftName);
-	SDLTextureImpl lightRight(kTestShadeTextureRightName);
-	SDLTextureImpl result;
+	Mock<ITexture> inputMock[5];
 
-	result = fromShadeTextureToNormalTexture(lightUp, lightDown,
-						 lightLeft, lightRight);
+	for (int i = 0; i < 5; ++i) {
+		When(Method(inputMock[i], width)).Return(kTestWidth);
+		When(Method(inputMock[i], height)).Return(kTestHeight);
+		When(Method(inputMock[i], used)).Return(true);
+		When(Method(inputMock[i], load)).Return(0);
+		When(ConstOverloadedMethod(inputMock[i], pixel,
+					   Color(uint32_t,
+						 uint32_t))).Return(Color());
+	}
 
-	bool expected = true;
-	bool actual = result.used();
+	ITexture& lightUp = inputMock[0].get();
+	ITexture& lightDown = inputMock[1].get();
+	ITexture& lightLeft = inputMock[2].get();
+	ITexture& lightRight = inputMock[3].get();
+	ITexture& result = inputMock[4].get();
 
-	ASSERT_EQ(expected, actual);
+	ASSERT_NO_THROW(
+		fromShadeTextureToNormalTexture(lightUp, lightDown,
+						lightLeft, lightRight,
+						result)
+	);
 }

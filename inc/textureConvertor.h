@@ -8,16 +8,11 @@
 
 namespace TextureConvertor
 {
-	template<typename T>
-	T fromShadeTextureToNormalTexture(T& lightUp, T& lightDown,
-					  T& lightLeft, T& lightRight)
-	{
-		static_assert(std::is_base_of<ITexture, T>::value,
-			      "typename T is not a derived of ITexture");
-
-		/* TODO Implement this function */
-		return T(lightUp);
-	}
+	void fromShadeTextureToNormalTexture(ITexture& lightUp,
+					     ITexture& lightDown,
+					     ITexture& lightLeft,
+					     ITexture& lightRight,
+					     ITexture& result);
 } /* namespace TextureConvertor */
 
 #endif /* TEXTURE_CONVERTOR_H */
