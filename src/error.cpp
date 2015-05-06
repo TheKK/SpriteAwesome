@@ -18,6 +18,8 @@ getError(int errorno)
 	case ERROR_TOO_MUCH_INPUT:
 		return (char*) _("You need exactly four input files to "
 				 "process");
+	case ERROR_TEX_LOAD_FAILED:
+		return (char*) _("Failed to load file");
 	default:
 		return (char*) _("Can not find corresponded error message, "
 			"please file a bug to developers, thanks!"); }
