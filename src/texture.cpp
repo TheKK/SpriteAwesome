@@ -76,6 +76,13 @@ SDLTextureImpl::load(const std::string& filePath)
 
 	return 0;
 }
+
+/* TODO Fix nameing problem, SDL could only store bmp format */
+int
+SDLTextureImpl::write(const std::string& fileName)
+{
+	return SDL_SaveBMP(surface_, fileName.c_str());
+}
 #endif /* DISABLE_SDL2 */
 
 #ifndef DISABLE_MAGICK_PLUS_PLUS
@@ -100,6 +107,18 @@ MagickTextureImpl::load(const std::string& filePath)
 		img_.read(filePath);
 	} catch (const std::exception& e) {
 		return ERROR_TEX_LOAD_FAILED;
+	}
+
+	return 0;
+}
+
+int
+MagickTextureImpl::write(const std::string& fileName)
+{
+	try {
+		img_.write(fileName);
+	} catch (const std::exception& e) {
+		return -1;
 	}
 
 	return 0;

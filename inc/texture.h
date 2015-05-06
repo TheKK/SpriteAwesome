@@ -32,6 +32,7 @@ public:
 
 	virtual bool used() const = 0;
 	virtual int load(const std::string& filePath) = 0;
+	virtual int write(const std::string& fileName) = 0;
 
 	virtual uint32_t width() const = 0;
 	virtual uint32_t height() const = 0;
@@ -59,6 +60,7 @@ public:
 	virtual bool used() const { return surface_ != nullptr; }
 
 	virtual int load(const std::string& filePath);
+	virtual int write(const std::string& fileName);
 
 	virtual uint32_t width() const
 	{
@@ -135,6 +137,7 @@ public:
 	virtual bool used() const { return img_.isValid(); }
 
 	virtual int load(const std::string& filePath);
+	virtual int write(const std::string& fileName);
 
 	virtual uint32_t width() const
 	{

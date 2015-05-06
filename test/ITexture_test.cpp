@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <string>
+#include <cstdio>
 #include <cstring>
 
 #include "data/imageForTest.h"
@@ -124,6 +125,21 @@ TYPED_TEST(ITextureInterface, setPixelColor)
 
 	ITexture::Color& expected = colorChangeTo;
 	ITexture::Color actual = target.pixel(x, y);
+
+	ASSERT_EQ(expected, actual);
+}
+
+TYPED_TEST(ITextureInterface, writePixelToFile)
+{
+	ITexture& target = *this->texture_;
+
+	target.load(kTestImageName);
+
+	std::string outputName = "/tmp/" + std::to_string(rand()) + ".png";
+	target.write(outputName);
+
+	int expected = 0;
+	int actual = remove(outputName.c_str());
 
 	ASSERT_EQ(expected, actual);
 }
