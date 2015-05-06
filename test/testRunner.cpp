@@ -2,6 +2,7 @@
 #include <SDL2/SDL_image.h>
 #include <Magick++.h>
 #include <stdexcept>
+#include <cstdlib>
 
 class MyEnvironment : public ::testing::Environment
 {
@@ -10,6 +11,8 @@ public:
 
 	virtual void SetUp()
 	{
+		srand(time(nullptr));
+
 		if (IMG_Init(IMG_INIT_PNG) < 0)
 			throw std::runtime_error(IMG_GetError());
 
