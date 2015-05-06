@@ -45,12 +45,10 @@ main(int argc, char* argv[])
 	try {
 		App app;
 
-		app.run(argc, argv);
+		return app.run(argc, argv);
 
 	} catch (const std::exception& e) {
 		fprintf(stderr, "%s\n", e.what());
 		return 1;
 	}
-
-	return 0;
 }
