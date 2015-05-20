@@ -46,6 +46,15 @@ install:
         - sudo make install
         - cd "${TRAVIS_BUILD_DIR}"
 
+        # Armadillo
+        - wget http://sourceforge.net/projects/arma/files/armadillo-5.100.2.tar.gz/download -O armadillo.tar.gz
+        - tar -xf armadillo.tar.gz
+        - cd armadillo-5.100.2/
+        - ./configure
+        - make -j 4
+        - sudo make install
+        - cd "${TRAVIS_BUILD_DIR}"
+
         # ImgaeMagick++
         - sudo apt-get install -qq libgraphicsmagick++1-dev libgraphicsmagick++3 libmagick++-dev libmagick++4
 
