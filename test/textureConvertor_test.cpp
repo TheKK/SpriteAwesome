@@ -27,8 +27,12 @@ TEST(TextureConvertors, fromShadeTextureToNormalTexture)
 		When(Method(inputMock[i], used)).Return(true);
 		When(Method(inputMock[i], load)).Return(0);
 		When(ConstOverloadedMethod(inputMock[i], pixel,
-					   Color(uint32_t,
-						 uint32_t))).Return(Color());
+					   Color(uint32_t, uint32_t))
+		).AlwaysReturn(Color(0, 0, 0));
+
+		When(OverloadedMethod(inputMock[i], pixel,
+				      void(uint32_t, uint32_t, Color))
+		).AlwaysReturn();
 	}
 
 	ITexture& lightUp = inputMock[0].get();
