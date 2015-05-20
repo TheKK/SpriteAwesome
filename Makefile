@@ -11,7 +11,7 @@ CXXFLAGS += -Wall -Wextra
 CXXFLAGS += -MMD -MP
 CXXFLAGS += -DPROJECT_NAME='"$(PROJECT_NAME)"'
 CXXFLAGS += $(shell pkg-config --cflags sdl2 SDL2_image Magick++)
-LIBS += $(shell pkg-config --libs sdl2 SDL2_image Magick++)
+LIBS += $(shell pkg-config --libs sdl2 SDL2_image Magick++) -larmadillo
 
 SRC_DIR := src
 INC_DIR := inc
