@@ -8,11 +8,13 @@
 
 namespace TextureConvertor
 {
-	void fromShadeTextureToNormalTexture(ITexture& lightUp,
-					     ITexture& lightDown,
-					     ITexture& lightLeft,
-					     ITexture& lightRight,
-					     ITexture& result);
+
+void fromShadeTextureToNormalTexture(ITexture& lightUp,
+				     ITexture& lightDown,
+				     ITexture& lightLeft,
+				     ITexture& lightRight,
+				     ITexture& result);
+
 } /* namespace TextureConvertor */
 
 #endif /* TEXTURE_CONVERTOR_H */
