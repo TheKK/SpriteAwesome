@@ -120,8 +120,6 @@ App::generateNormalTexture_()
 							  lightLeft, lightRight,
 							  result);
 
-	/* TODO Algorithm here */
-
 	result.write(outputFileName_);
 
 	return 0;
