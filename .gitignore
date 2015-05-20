@@ -25,5 +25,7 @@
 *.out
 *.app
 
+.*
+
 build/
 *.swp
