@@ -22,10 +22,12 @@ TEST(TextureConvertors, fromShadeTextureToNormalTexture)
 	Mock<ITexture> inputMock[5];
 
 	for (int i = 0; i < 5; ++i) {
-		When(Method(inputMock[i], width)).Return(kTestWidth);
-		When(Method(inputMock[i], height)).Return(kTestHeight);
-		When(Method(inputMock[i], used)).Return(true);
-		When(Method(inputMock[i], load)).Return(0);
+		When(Method(inputMock[i], used)).AlwaysReturn(true);
+		When(Method(inputMock[i], load)).AlwaysReturn(0);
+		When(Method(inputMock[i], write)).AlwaysReturn(0);
+		When(Method(inputMock[i], width)).AlwaysReturn(kTestWidth);
+		When(Method(inputMock[i], height)).AlwaysReturn(kTestHeight);
+
 		When(ConstOverloadedMethod(inputMock[i], pixel,
 					   Color(uint32_t, uint32_t))
 		).AlwaysReturn(Color(0, 0, 0));
