@@ -25,16 +25,17 @@ Dependency
 -----
 
 - Tools
-	- C++ compiler (support C++11)
+	- C++ compiler (which support C++11)
 	- GNU make
 	- pkg-config
 	- cppcheck (optional)
 
 - Libraries
-	- SDL >= 2.0
-	- SDL_Image >= 2.0
-	- ImageMagick++
-	- gtest (optional)
+	- [SDL](http://www.libsdl.org/) >= 2.0
+	- [SDL_Image](https://www.libsdl.org/projects/SDL_image/) >= 2.0
+	- [ImageMagick++](http://www.imagemagick.org)
+	- [Armadillo](http://arma.sourceforge.net/)
+	- [gtest](https://code.google.com/p/googletest/) (optional)
 
 Build
 ----
@@ -52,7 +53,7 @@ make runTest #executable file located at build/bin/
 
 To run cppcheck
 ```shell
-make cppcheck #I'm not sure if I can trust cppcheck...
+make cppcheck #I'm not sure if we can trust cppcheck...
 ```
 
 To generate or update pot file
@@ -60,11 +61,12 @@ To generate or update pot file
 make l10n #pot file located at po/
 ```
 
-To clean
+To clean the mess
 ```shell
 #Use make
 make clean
-#or rm build/ yourself
+
+#or rm build/ directory yourself
 rm -fr build
 ```
 
