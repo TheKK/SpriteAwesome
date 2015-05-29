@@ -18,7 +18,7 @@ App::run(int argc, char* argv[])
 	int ret;
 
 	ret = appOptions_.parse(argc, argv);
-	if (ret < 0) {
+	if (ret) {
 		if (ret == ERROR_INVALID_OPTION)
 			printUsage_();
 
