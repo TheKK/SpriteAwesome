@@ -4,7 +4,12 @@
 
 #include <armadillo>
 
+#include "appOptions.h"
 #include "texture.h"
+
+class ShadeTextureToNormalConverter;
+class ShadeTextureToDepthConverter;
+class ShadeTextureToAmbientConverter;
 
 class ShadeTextureConverter
 {

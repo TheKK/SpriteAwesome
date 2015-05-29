@@ -1,9 +1,10 @@
 #include <cstdio>
+#include <memory>
 
 #include "error.h"
 #include "l10n.h"
 #include "texture.h"
-#include "textureConvertor.h"
+#include "textureConverterFactory.h"
 
 #include "app.h"
 
@@ -16,6 +17,7 @@ int
 App::run(int argc, char* argv[])
 {
 	int ret;
+	std::unique_ptr<ShadeTextureConverter> converter;
 
 	ret = appOptions_.parse(argc, argv);
 	if (ret) {
@@ -41,45 +43,12 @@ App::run(int argc, char* argv[])
 	else
 		outputFileName_ = appOptions_.getOuputFileName();
 
-	switch (appOptions_.getOperation()) {
-	case Operations::generateNormalTexture:
-		{
-		ShadeTextureToNormalConverter converter;
-		ret = processShadeTexture_(converter);
-		if (ret) {
-			fprintf(stderr,
-				_("Failed to generate normal texture\n"));
-			return -1;
-		}
-		break;
-		}
-	case Operations::generateDepthTexture:
-		{
-		ShadeTextureToDepthConverter converter;
-		ret = processShadeTexture_(converter);
-		if (ret) {
-			fprintf(stderr,
-				_("Failed to generate depth texture\n"));
-			return -1;
-		}
-		break;
-		}
-	case Operations::generateAmbientTexture:
-		{
-		ShadeTextureToAmbientConverter converter;
-		ret = processShadeTexture_(converter);
-		if (ret) {
-			fprintf(stderr,
-				_("Failed to generate ambient texture\n"));
-			return -1;
-		}
-		break;
-		}
-	default:
-	case Operations::none:
+	converter.reset(TextureConverterFactory::make(
+			appOptions_.getOperation()));
+	if (!converter)
 		printUsage_();
-		break;
-	}
+	else
+		processShadeTexture_(*converter);
 
 	return 0;
 }
