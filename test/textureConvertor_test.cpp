@@ -5,7 +5,6 @@
 
 #include "textureConvertor.h"
 
-using namespace TextureConvertor;
 using namespace fakeit;
 
 typedef ITexture::Color Color;
@@ -16,9 +15,26 @@ namespace
 	const uint32_t kTestHeight = 321;
 }
 
-/* XXX Kind of useless test */
-TEST(TextureConvertors, fromShadeTextureToNormalTexture)
+typedef testing::Types<ShadeTextureToNormalConverter,
+	ShadeTextureToDepthConverter,
+	ShadeTextureToAmbientConverter> Impelementations;
+
+TYPED_TEST_CASE(ShadeTextureConverterInterface, Impelementations);
+
+template <typename T>
+class ShadeTextureConverterInterface : public testing::Test
 {
+protected:
+	ShadeTextureConverterInterface() : converter_(new T()) {}
+	virtual ~ShadeTextureConverterInterface() { delete converter_; }
+
+	ShadeTextureConverter* converter_;
+};
+
+/* XXX Kind of useless test */
+TYPED_TEST(ShadeTextureConverterInterface, inputLegleShadeTextureThenPass)
+{
+	ShadeTextureConverter& target = *this->converter_;
 	Mock<ITexture> inputMock[5];
 
 	for (int i = 0; i < 5; ++i) {
@@ -43,9 +59,9 @@ TEST(TextureConvertors, fromShadeTextureToNormalTexture)
 	ITexture& lightRight = inputMock[3].get();
 	ITexture& result = inputMock[4].get();
 
-	ASSERT_NO_THROW(
-		fromShadeTextureToNormalTexture(lightUp, lightDown,
-						lightLeft, lightRight,
-						result)
-	);
+	int expected = 0;
+	int actual = target.convert(lightUp, lightDown, lightLeft, lightRight,
+				    result);
+
+	ASSERT_EQ(expected, actual);
 }

@@ -1,41 +1,15 @@
-#include <armadillo>
 #include <cmath>
+
+#include "error.h"
 
 #include "textureConvertor.h"
 
-namespace TextureConvertor
-{
-
-static arma::rowvec
-rotateAroundX(double degree, arma::rowvec vec)
-{
-	arma::mat rotateMatrix = {
-		{1, 0, 0},
-		{0, cos(degree), -1 * sin(degree)},
-		{0, sin(degree), cos(degree)}
-	};
-
-	return vec * rotateMatrix.t();
-}
-
-static arma::rowvec3
-rotateAroundY(double degree, arma::rowvec3 vec)
-{
-	arma::mat33 rotateMatrix = {
-		{cos(degree), 0, sin(degree)},
-		{0, 1, 0},
-		{-1 * sin(degree), 0, cos(degree)}
-	};
-
-	return vec * rotateMatrix.t();
-}
-
-void
-fromShadeTextureToNormalTexture(ITexture& lightUp,
-				ITexture& lightDown,
-				ITexture& lightLeft,
-				ITexture& lightRight,
-				ITexture& result)
+int
+ShadeTextureToNormalConverter::convert(ITexture& lightUp,
+				       ITexture& lightDown,
+				       ITexture& lightLeft,
+				       ITexture& lightRight,
+				       ITexture& result)
 {
 	int width = result.width(), height = result.height();
 	double reflxDegree;
@@ -57,20 +31,20 @@ fromShadeTextureToNormalTexture(ITexture& lightUp,
 			    lightUpColor.b == 255) {
 				resultNormal = {-1, -1, -1};
 			} else {
-				reflxDegree = -1 * acos((double) lightUpColor.r / 255.0);
-				lightUpNormal =  rotateAroundX(reflxDegree,
+				reflxDegree = -1 * acos(lightUpColor.r / 255.0);
+				lightUpNormal =  rotateAroundX_(reflxDegree,
 							       {0, -1, 0});
 
-				reflxDegree = acos((double) lightDownColor.r / 255.0);
-				lightDownNormal = rotateAroundX(reflxDegree,
+				reflxDegree = acos(lightDownColor.r / 255.0);
+				lightDownNormal = rotateAroundX_(reflxDegree,
 								{0, 1, 0});
 
-				reflxDegree = acos((double) lightLeftColor.r / 255.0);
-				lightLeftNormal = rotateAroundY(reflxDegree,
+				reflxDegree = acos(lightLeftColor.r / 255.0);
+				lightLeftNormal = rotateAroundY_(reflxDegree,
 								{-1, 0, 0});
 
-				reflxDegree = -1 * acos((double) lightRightColor.r / 255.0);
-				lightRightNormal = rotateAroundY(reflxDegree,
+				reflxDegree = -1 * acos(lightRightColor.r / 255.0);
+				lightRightNormal = rotateAroundY_(reflxDegree,
 								 {1, 0, 0});
 
 				resultNormal =
@@ -87,6 +61,31 @@ fromShadeTextureToNormalTexture(ITexture& lightUp,
 				     ));
 		}
 	}
+
+	return ERROR_NO_ERROR;
 }
 
-} /* namespace TextureConvertor */
+arma::rowvec
+ShadeTextureToNormalConverter::rotateAroundX_(double degree, arma::rowvec vec)
+{
+	arma::mat rotateMatrix = {
+		{1, 0, 0},
+		{0, cos(degree), -1 * sin(degree)},
+		{0, sin(degree), cos(degree)}
+	};
+
+	return vec * rotateMatrix.t();
+}
+
+arma::rowvec
+ShadeTextureToNormalConverter::rotateAroundY_(double degree, arma::rowvec vec)
+{
+	arma::mat33 rotateMatrix = {
+		{cos(degree), 0, sin(degree)},
+		{0, 1, 0},
+		{-1 * sin(degree), 0, cos(degree)}
+	};
+
+	return vec * rotateMatrix.t();
+}
+

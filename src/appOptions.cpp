@@ -11,7 +11,7 @@ AppOptions::parse(int argc, char* argv[])
 
 	optind = 0;
 
-	while ((opt = getopt(argc, argv, "hvndo:")) != -1) {
+	while ((opt = getopt(argc, argv, "hvndao:")) != -1) {
 		switch (opt) {
 		case 'h':
 			shouldPrintHelp_ = true;
@@ -30,6 +30,12 @@ AppOptions::parse(int argc, char* argv[])
 				return ERROR_MULTI_OPERATION;
 
 			operation_ = Operations::generateDepthTexture;
+			break;
+		case 'a':
+			if (operation_ != Operations::none)
+				return ERROR_MULTI_OPERATION;
+
+			operation_ = Operations::generateAmbientTexture;
 			break;
 		case 'o':
 			outputFile_ = optarg;

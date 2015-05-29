@@ -2,19 +2,53 @@
 #define TEXTURE_CONVERTOR_H
 #pragma once
 
-#include <type_traits>
+#include <armadillo>
 
 #include "texture.h"
 
-namespace TextureConvertor
+class ShadeTextureConverter
 {
+public:
+	virtual ~ShadeTextureConverter() {}
 
-void fromShadeTextureToNormalTexture(ITexture& lightUp,
-				     ITexture& lightDown,
-				     ITexture& lightLeft,
-				     ITexture& lightRight,
-				     ITexture& result);
+	virtual int convert(ITexture& lightUp, ITexture& lightDown,
+			    ITexture& lightLeft, ITexture& lightRight,
+			    ITexture& result) = 0;
+};
 
-} /* namespace TextureConvertor */
+class ShadeTextureToNormalConverter : public ShadeTextureConverter
+{
+public:
+	virtual int convert(ITexture& lightUp, ITexture& lightDown,
+			    ITexture& lightLeft, ITexture& lightRight,
+			    ITexture& result);
+private:
+	arma::rowvec rotateAroundX_(double degree, arma::rowvec vec);
+	arma::rowvec rotateAroundY_(double degree, arma::rowvec vec);
+};
+
+class ShadeTextureToDepthConverter : public ShadeTextureConverter
+{
+public:
+	virtual int convert(ITexture& lightUp, ITexture& lightDown,
+			    ITexture& lightLeft, ITexture& lightRight,
+			    ITexture& result)
+	{
+		return 0;
+	}
+private:
+};
+
+class ShadeTextureToAmbientConverter : public ShadeTextureConverter
+{
+public:
+	virtual int convert(ITexture& lightUp, ITexture& lightDown,
+			    ITexture& lightLeft, ITexture& lightRight,
+			    ITexture& result)
+	{
+		return 0;
+	}
+private:
+};
 
 #endif /* TEXTURE_CONVERTOR_H */

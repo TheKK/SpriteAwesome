@@ -8,7 +8,8 @@
 enum class Operations {
 	none,
 	generateNormalTexture,
-	generateDepthTexture
+	generateDepthTexture,
+	generateAmbientTexture
 };
 
 enum class ShadeDir {

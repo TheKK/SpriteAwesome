@@ -43,16 +43,38 @@ App::run(int argc, char* argv[])
 
 	switch (appOptions_.getOperation()) {
 	case Operations::generateNormalTexture:
-		ret = generateNormalTexture_();
+		{
+		ShadeTextureToNormalConverter converter;
+		ret = processShadeTexture_(converter);
 		if (ret) {
 			fprintf(stderr,
 				_("Failed to generate normal texture\n"));
 			return -1;
 		}
 		break;
+		}
 	case Operations::generateDepthTexture:
-		printf("depth texture");
+		{
+		ShadeTextureToDepthConverter converter;
+		ret = processShadeTexture_(converter);
+		if (ret) {
+			fprintf(stderr,
+				_("Failed to generate depth texture\n"));
+			return -1;
+		}
 		break;
+		}
+	case Operations::generateAmbientTexture:
+		{
+		ShadeTextureToAmbientConverter converter;
+		ret = processShadeTexture_(converter);
+		if (ret) {
+			fprintf(stderr,
+				_("Failed to generate ambient texture\n"));
+			return -1;
+		}
+		break;
+		}
 	default:
 	case Operations::none:
 		printUsage_();
@@ -80,7 +102,7 @@ App::printVersion_()
 }
 
 int
-App::generateNormalTexture_()
+App::processShadeTexture_(ShadeTextureConverter& converter)
 {
 	int ret = 0;
 	MagickTextureImpl lightUp, lightDown, lightLeft, lightRight, result;
@@ -116,9 +138,10 @@ App::generateNormalTexture_()
 		return -1;
 	}
 
-	TextureConvertor::fromShadeTextureToNormalTexture(lightUp, lightDown,
-							  lightLeft, lightRight,
-							  result);
+	ret = converter.convert(lightUp, lightDown, lightLeft, lightRight,
+				result);
+	if (ret)
+		return -1;
 
 	result.write(outputFileName_);
 

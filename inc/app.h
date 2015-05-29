@@ -6,6 +6,8 @@
 
 #include "appOptions.h"
 
+class ShadeTextureConverter;
+
 class App
 {
 public:
@@ -22,7 +24,7 @@ private:
 	void printHelp_();
 	void printVersion_();
 
-	int generateNormalTexture_();
+	int processShadeTexture_(ShadeTextureConverter& converter);
 };
 
 #endif /* APP_H */

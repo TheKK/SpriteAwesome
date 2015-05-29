@@ -192,6 +192,23 @@ TEST(AppOptions, parseToSetOperationAsGenerateDepthTexture)
 	ASSERT_EQ(expected, actual);
 }
 
+TEST(AppOptions, parseToSetOperationAsGenerateAmbientTexture)
+{
+	AppOptions target;
+	int argc = 2;
+	char* argv[] = {
+		(char*) "target",
+		(char*) "-a"
+	};
+
+	target.parse(argc, argv);
+
+	Operations expected = Operations::generateAmbientTexture;
+	Operations actual = target.getOperation();
+
+	ASSERT_EQ(expected, actual);
+}
+
 TEST(AppOptions, parseWithLessThanFourInput)
 {
 	AppOptions target;
