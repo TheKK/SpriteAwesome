@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include <string>
 
+#include "error.h"
+
 #include "appOptions.h"
 
 TEST(AppOptions, defaultConstructorWithNoArgument)
@@ -17,7 +19,7 @@ TEST(AppOptions, parseWithKnownOptions)
 		(char*) "-h"
 	};
 
-	int expected = 0;
+	int expected = ERROR_NO_ERROR;
 	int actual = target.parse(argc, argv);
 
 	ASSERT_EQ(expected, actual);
@@ -32,7 +34,7 @@ TEST(AppOptions, parseWithUnknowOptions)
 		(char*) "-j"
 	};
 
-	int expected = -1;
+	int expected = ERROR_INVALID_OPTION;
 	int actual = target.parse(argc, argv);
 
 	ASSERT_EQ(expected, actual);
@@ -150,10 +152,10 @@ TEST(AppOptions, parseMultipleOperationToFailed)
 		(char*) "-n"
 	};
 
-	int nonexpected = 0;
+	int expected = ERROR_MULTI_OPERATION;
 	int actual = target.parse(argc, argv);
 
-	ASSERT_NE(nonexpected, actual);
+	ASSERT_EQ(expected, actual);
 }
 
 TEST(AppOptions, parseToSetOperationAsGenerateNormalTexture)
@@ -199,10 +201,10 @@ TEST(AppOptions, parseWithLessThanFourInput)
 		(char*) "input1"
 	};
 
-	int notExpected = 0;
+	int expected = ERROR_NOT_ENOUGH_INPUT;
 	int actual = target.parse(argc, argv);
 
-	ASSERT_NE(notExpected, actual);
+	ASSERT_EQ(expected, actual);
 }
 
 TEST(AppOptions, parseWithMoreThanFourInput)
@@ -218,10 +220,10 @@ TEST(AppOptions, parseWithMoreThanFourInput)
 		(char*) "input5"
 	};
 
-	int notExpected = 0;
+	int expected = ERROR_TOO_MUCH_INPUT;
 	int actual = target.parse(argc, argv);
 
-	ASSERT_NE(notExpected, actual);
+	ASSERT_EQ(expected, actual);
 }
 
 TEST(AppOptions, parseWithExactlyFourInput)
@@ -236,7 +238,7 @@ TEST(AppOptions, parseWithExactlyFourInput)
 		(char*) "input4"
 	};
 
-	int expected = 0;
+	int expected = ERROR_NO_ERROR;
 	int actual = target.parse(argc, argv);
 
 	ASSERT_EQ(expected, actual);

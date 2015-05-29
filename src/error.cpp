@@ -3,7 +3,7 @@
 #include "error.h"
 
 char*
-getError(int errorno)
+getError(uint32_t errorno)
 {
 	switch (errorno) {
 	case ERROR_NO_ERROR:

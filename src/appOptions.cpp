@@ -44,8 +44,10 @@ AppOptions::parse(int argc, char* argv[])
 		optind++;
 	}
 
-	if (inputFiles_.size() != 4)
+	if (inputFiles_.size() < 4)
 		return ERROR_NOT_ENOUGH_INPUT;
+	else if (inputFiles_.size() > 4)
+		return ERROR_TOO_MUCH_INPUT;
 
 	return 0;
 }
