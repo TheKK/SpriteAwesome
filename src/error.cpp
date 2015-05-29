@@ -22,5 +22,6 @@ getError(uint32_t errorno)
 		return (char*) _("Failed to load file");
 	default:
 		return (char*) _("Can not find corresponded error message, "
-			"please file a bug to developers, thanks!"); }
+			"please file a bug to developers, thanks!");
+	}
 }
