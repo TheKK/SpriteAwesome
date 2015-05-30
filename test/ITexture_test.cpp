@@ -4,6 +4,7 @@
 #include <cstring>
 
 #include "data/imageForTest.h"
+#include "error.h"
 
 #include "texture.h"
 
@@ -52,14 +53,12 @@ TYPED_TEST(ITextureInterface, loadTextureFromFileAndFailure)
 	ASSERT_NE(notExpected, actual);
 }
 
-TYPED_TEST(ITextureInterface, createBlankAndCheckIfUsed)
+TYPED_TEST(ITextureInterface, createBlankTexture)
 {
 	ITexture& target = *this->texture_;
 
-	target.create(123, 321);
-
-	bool expected = true;
-	bool actual = target.used();
+	int expected = ERROR_NO_ERROR;
+	int actual = target.create(123, 321);
 
 	ASSERT_EQ(expected, actual);
 }
