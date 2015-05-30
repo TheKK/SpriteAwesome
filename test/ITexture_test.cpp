@@ -52,6 +52,18 @@ TYPED_TEST(ITextureInterface, loadTextureFromFileAndFailure)
 	ASSERT_NE(notExpected, actual);
 }
 
+TYPED_TEST(ITextureInterface, createBlankAndCheckIfUsed)
+{
+	ITexture& target = *this->texture_;
+
+	target.create(123, 321);
+
+	bool expected = true;
+	bool actual = target.used();
+
+	ASSERT_EQ(expected, actual);
+}
+
 TYPED_TEST(ITextureInterface, loadTextureAndCheckIfUsed)
 {
 	ITexture& target = *this->texture_;

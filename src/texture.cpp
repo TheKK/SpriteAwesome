@@ -68,6 +68,19 @@ SDLTextureImpl::~SDLTextureImpl()
 }
 
 int
+SDLTextureImpl::create(uint32_t w, uint32_t h)
+{
+	if (surface_)
+		SDL_FreeSurface(surface_);
+
+	surface_ = SDL_CreateRGBSurface(0, w, h, 24, 0, 0, 0, 0);
+	if (!surface_)
+		return ERROR_TEX_CREATE_FAILED;
+
+	return 0;
+}
+
+int
 SDLTextureImpl::load(const std::string& filePath)
 {
 	surface_ = IMG_Load(filePath.c_str());
@@ -98,6 +111,14 @@ MagickTextureImpl::operator==(const MagickTextureImpl& other)
 		return true;
 	else
 		return (img_ == other.img_);
+}
+
+int
+MagickTextureImpl::create(uint32_t w, uint32_t h)
+{
+	img_.size(std::to_string(w) + "X" + std::to_string(h));
+
+	return 0;
 }
 
 int

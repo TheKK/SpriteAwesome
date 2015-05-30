@@ -31,6 +31,7 @@ public:
 	virtual ~ITexture() {}
 
 	virtual bool used() const = 0;
+	virtual int create(uint32_t w, uint32_t h) = 0;
 	virtual int load(const std::string& filePath) = 0;
 	virtual int write(const std::string& fileName) = 0;
 
@@ -58,7 +59,7 @@ public:
 	virtual ~SDLTextureImpl();
 
 	virtual bool used() const { return surface_ != nullptr; }
-
+	virtual int create(uint32_t w, uint32_t h);
 	virtual int load(const std::string& filePath);
 	virtual int write(const std::string& fileName);
 
@@ -135,7 +136,7 @@ public:
 	bool operator==(const MagickTextureImpl& other);
 
 	virtual bool used() const { return img_.isValid(); }
-
+	virtual int create(uint32_t w, uint32_t h);
 	virtual int load(const std::string& filePath);
 	virtual int write(const std::string& fileName);
 
