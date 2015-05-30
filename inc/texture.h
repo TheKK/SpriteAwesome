@@ -64,14 +64,14 @@ public:
 
 	virtual uint32_t width() const
 	{
-		assert(surface_);
+		assert(used());
 
 		return surface_->w;
 	}
 
 	virtual uint32_t height() const noexcept
 	{
-		assert(surface_);
+		assert(used());
 
 		return surface_->h;
 	}
