@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstdlib>
 #include <memory>
 
 #include "error.h"
@@ -26,16 +27,16 @@ App::run(int argc, char* argv[])
 
 		fprintf(stderr, "%s\n", getError(ret));
 
-		return -1;
+		return ret;
 	}
 
 	if (appOptions_.shouldPrintHelp()) {
 		printHelp_();
-		return 0;
+		return EXIT_SUCCESS;
 	}
 	if (appOptions_.shouldPrintVersion()) {
 		printVersion_();
-		return 0;
+		return EXIT_SUCCESS;
 	}
 
 	if (appOptions_.shouldUseDefaultOutputName())
@@ -45,12 +46,16 @@ App::run(int argc, char* argv[])
 
 	converter.reset(TextureConverterFactory::make(
 			appOptions_.getOperation()));
-	if (!converter)
+	if (!converter) {
 		printUsage_();
-	else
-		processShadeTexture_(*converter);
+		return EXIT_FAILURE;
+	}
 
-	return 0;
+	ret = processShadeTexture_(*converter);
+	if (ret)
+		return EXIT_FAILURE;
+
+	return EXIT_SUCCESS;
 }
 
 void

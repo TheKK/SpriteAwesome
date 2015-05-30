@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstdlib>
 #include <stdexcept>
 #include <Magick++.h>
 
@@ -28,7 +29,12 @@ localizationInit()
 int
 systemInit(int argc, char* argv[])
 {
-	Magick::InitializeMagick(*argv);
+	try {
+		Magick::InitializeMagick(*argv);
+	} catch (const std::exception& e) {
+		fprintf(stderr, "%s\n", e.what());
+		return -1;
+	}
 
 	return 0;
 }
@@ -36,19 +42,13 @@ systemInit(int argc, char* argv[])
 int
 main(int argc, char* argv[])
 {
+	App app;
+
 	if (localizationInit() < 0)
 		printf("WARN: Failed with localization\n");
 
 	if (systemInit(argc, argv) < 0)
-		return 1;
+		return EXIT_FAILURE;
 
-	try {
-		App app;
-
-		return app.run(argc, argv);
-
-	} catch (const std::exception& e) {
-		fprintf(stderr, "%s\n", e.what());
-		return 1;
-	}
+	return app.run(argc, argv);
 }
