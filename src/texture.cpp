@@ -116,7 +116,11 @@ MagickTextureImpl::operator==(const MagickTextureImpl& other)
 int
 MagickTextureImpl::create(uint32_t w, uint32_t h)
 {
-	img_.size(std::to_string(w) + "X" + std::to_string(h));
+	try {
+		img_.size(std::to_string(w) + "X" + std::to_string(h));
+	} catch (const std::exception& e) {
+		return ERROR_TEX_CREATE_FAILED;
+	}
 
 	return 0;
 }
