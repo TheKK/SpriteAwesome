@@ -105,8 +105,7 @@ App::processShadeTexture_(ShadeTextureConverter& converter)
 		return -1;
 	}
 
-	/* XXX Need a method to create empty texture */
-	ret = result.load(appOptions_.getInputFileName(ShadeDir::Up));
+	ret = result.create(lightUp.width(), lightUp.height());
 	if (ret) {
 		fprintf(stderr, "%s\n", getError(ret));
 		return -1;
